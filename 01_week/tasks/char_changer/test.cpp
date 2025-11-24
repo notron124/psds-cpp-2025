@@ -70,7 +70,7 @@ TEST(CharChangerTest, SimpleExample) {
         CheckAnswer(array, size, ',', expected, expected_size);
     }
     {
-        char array[] = "ABCDEF";
+        char array[] = "abcdef";
         const size_t size = std::size(array);
         char expected[size] = "ABCDEF";
         size_t expected_size = 6;
@@ -101,7 +101,7 @@ TEST(CharChangerTest, SimpleExample) {
         char array[] = "*/){@#$^&<,";
         const size_t size = std::size(array);
         char expected[size] = "___________";
-        size_t expected_size = 10;
+        size_t expected_size = 11;
         CheckAnswer(array, size, ',', expected, expected_size);
     }
 }
@@ -117,7 +117,7 @@ TEST(CharChangerTest, DontChangeAfterChange) {
     {
         char array[] = "aaaAAaaAAAbA";
         const size_t size = std::size(array);
-        char expected[size] = "A3A2A2A3bA";
+        char expected[size] = "A3A2A2A3BA";
         size_t expected_size = 10;
         CheckAnswer(array, size, ',', expected, expected_size);
     }
@@ -183,7 +183,7 @@ TEST(CharChangerTest, BasicExample) {
 TEST(CharChangerTest, ComplexExample) {
     char array[] = "   ,((   9998344   ___appleEE*98";
     const size_t size = std::size(array);
-    char expected[size] = "___2_*3***2__3AP2LEE2___";
+    char expected[size] = "___2_*3***2__3AP2LEE2_**";
     size_t expected_size = 24;
     CheckAnswer(array, size, '_', expected, expected_size);
 }
