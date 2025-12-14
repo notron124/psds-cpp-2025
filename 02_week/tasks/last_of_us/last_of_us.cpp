@@ -1,6 +1,26 @@
 #include <stdexcept>
 
+typedef bool (*predicate_func_t)(int);
 
-/* return_type */ FindLastElement(/* ptr_type */ begin, /* ptr_type */ end, /* func_type */ predicate) {
-    throw std::runtime_error{"Not implemented"};
+const int* FindLastElement(const int* begin, const int* end, predicate_func_t predicate) {
+    if (begin == nullptr || end == nullptr) {
+        return end;
+    }
+
+    if (begin >= end) {
+        return end;
+    }
+
+    const int* result = end;
+
+    // begin и end передаются by copy, так что инкремент указателя
+    // не повлияет на переданный указатель 
+    while (begin != end) {
+        if (predicate(*begin)) {
+            result = begin;
+        }
+        ++begin;
+    }
+
+    return result;
 }
