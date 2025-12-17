@@ -1,5 +1,7 @@
-#include <stdexcept>
-#include <vector>
+#include <cstdint>
+#include <ostream>
+#include <sys/types.h>
+#include <type_traits>
 
 enum class CheckFlags : uint8_t {
     NONE = 0,
@@ -12,22 +14,52 @@ enum class CheckFlags : uint8_t {
     ALL = TIME | DATE | USER | CERT | KEYS | DEST
 };
 
-/* return_type */ operator|(/* args */) {
-    throw std::runtime_error{"Not implemented"};
+// Для GoogleTest
+explicit operator bool(CheckFlags f) {
+    return static_cast<std::underlying_type_t<CheckFlags>>(f) != 0;
 }
 
-/* return_type */ operator&(/* args */) {
-    throw std::runtime_error{"Not implemented"};
+bool operator!(const CheckFlags f) {
+    return static_cast<std::underlying_type_t<CheckFlags>>(f) == 0;
 }
 
-/* return_type */ operator^(/* args */) {
-    throw std::runtime_error{"Not implemented"};
+bool operator==(CheckFlags lhs, CheckFlags rhs) {
+    return static_cast<std::underlying_type_t<CheckFlags>>(lhs) ==
+           static_cast<std::underlying_type_t<CheckFlags>>(rhs);
 }
 
-/* return_type */ operator~(/* args */) {
-    throw std::runtime_error{"Not implemented"};
+bool operator!=(CheckFlags lhs, CheckFlags rhs) {
+    return !(lhs == rhs);
 }
 
-/* return_type */ operator<<(/* args */) {
-    throw std::runtime_error{"Not implemented"};
+CheckFlags operator|(CheckFlags lhs, CheckFlags rhs) {
+    return static_cast<CheckFlags>(
+            (static_cast<std::underlying_type_t<CheckFlags>>(lhs) |
+            static_cast<std::underlying_type_t<CheckFlags>>(rhs)) & static_cast<std::underlying_type_t<CheckFlags>>(CheckFlags::ALL)
+    );
+}
+
+CheckFlags operator&(CheckFlags lhs, CheckFlags rhs) {
+    auto uintLhs = static_cast<std::underlying_type_t<CheckFlags>>(lhs);
+    auto uintRhs = static_cast<std::underlying_type_t<CheckFlags>>(rhs);
+    
+    return static_cast<CheckFlags>(uintLhs & uintRhs);
+}
+
+CheckFlags operator^(CheckFlags lhs, CheckFlags rhs) {
+    return static_cast<CheckFlags>(
+        static_cast<std::underlying_type_t<CheckFlags>>(lhs) ^
+        static_cast<std::underlying_type_t<CheckFlags>>(rhs)
+    );
+}
+
+CheckFlags operator~(const CheckFlags& f) {
+    return static_cast<CheckFlags>(~static_cast<std::underlying_type_t<CheckFlags>>(f));
+}
+
+std::ostream& operator<<(std::ostream& os, const CheckFlags& f) {
+    if (f == CheckFlags::ALL) {
+        return os;
+    }    
+    return os;
 }
