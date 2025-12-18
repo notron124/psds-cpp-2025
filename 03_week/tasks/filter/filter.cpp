@@ -6,12 +6,18 @@ void Filter(std::vector<int> &v, Predicate predicateFunc) {
     if (v.empty() || predicateFunc == nullptr) {
         return;
     }
-    
-    for (auto it = v.begin(); it != v.end();) {
-        if (!predicateFunc(*it)) {
-            it = v.erase(it);
-        } else {
-            ++it;
+
+    auto secondIt = v.begin();
+    size_t newSize = 0;
+    for (auto it = v.begin(); it != v.end(); ++it) {
+        if (predicateFunc(*it)) {
+            if (it != secondIt) {
+                *secondIt = *it; 
+            }
+            ++secondIt;
+            ++newSize;
         }
     }
+
+    v.resize(newSize);
 }
