@@ -7,9 +7,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON) # Гарантирует использов�
 set(EXAMPLES_DIR examples) # Определим переменную с именем директории
 set(TASKS_DIR tasks)
 
-add_subdirectory(tasks)
+# add_subdirectory(tasks)
 
 # Создать исполняемый файл для каждого примера
 if (BUILD_EXAMPLES_04_WEEK)
+<<<<<<< HEAD
+#    add_example(struct_examples ${EXAMPLES_DIR}/struct_examples.cpp)
+endif()
+=======
 #    add_example(class_examples ${EXAMPLES_DIR}/class_examples.cpp)
 endif()
+>>>>>>> 03c8f52452515f446a786675ecaff9cf59a0f216

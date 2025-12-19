@@ -68,47 +68,68 @@
 
   "data_stats": {
     "max_score": 100,
-    "deadline": "2025-12-18 23:59",
+    "deadline": "2025-12-19 23:59",
     "description": "Статистика данных"
   },
   "unique": {
     "max_score": 100,
-    "deadline": "2025-12-18 23:59",
+    "deadline": "2025-12-19 23:59",
     "description": "Уникальные элементы"
   },
   "range": {
     "max_score": 100,
-    "deadline": "2025-12-18 23:59",
+    "deadline": "2025-12-19 23:59",
     "description": "Диапазон элементов"
   },
   "minmax": {
     "max_score": 100,
-    "deadline": "2025-12-18 23:59",
+    "deadline": "2025-12-19 23:59",
     "description": "Минимум и максимум"
   },
   "find_all": {
     "max_score": 100,
-    "deadline": "2025-12-18 23:59",
+    "deadline": "2025-12-19 23:59",
     "description": "Найти все элементы"
   },
   "os_overload": {
     "max_score": 100,
-    "deadline": "2025-12-18 23:59",
+    "deadline": "2025-12-19 23:59",
     "description": "Перегрузка оператора вывода"
   },
   "easy_compare": {
     "max_score": 100,
-    "deadline": "2025-12-18 23:59",
+    "deadline": "2025-12-19 23:59",
     "description": "Оператор сравнения"
   },
   "filter": {
     "max_score": 100,
-    "deadline": "2025-12-18 23:59",
+    "deadline": "2025-12-19 23:59",
     "description": "Фильтрация данных"
   },
   "enum_operators": {
     "max_score": 200,
-    "deadline": "2025-12-18 23:59",
+    "deadline": "2025-12-19 23:59",
     "description": "Переопределение побитовых операторов"
+  },
+
+  "stack": {
+    "max_score": 100,
+    "deadline": "2025-12-26 23:59",
+    "description": "Стек"
+  },
+  "queue": {
+    "max_score": 200,
+    "deadline": "2025-12-26 23:59",
+    "description": "Очередь"
+  },
+  "ring_buffer": {
+    "max_score": 300,
+    "deadline": "2025-12-26 23:59",
+    "description": "Кольцевой буфер"
+  },
+  "phasor": {
+    "max_score": 400,
+    "deadline": "2025-12-26 23:59",
+    "description": "Комплексная амплитуда"
   }
 }

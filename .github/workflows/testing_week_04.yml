@@ -1,4 +1,4 @@
-name: Testing Tasks Week 03
+name: Testing Tasks Week 04
 
 on:
   workflow_dispatch:
@@ -10,18 +10,13 @@ on:
         default: 'all'
         options:
           - all
-          - data_stats
-          - unique
-          - range
-          - minmax
-          - find_all
-          - os_overload
-          - easy_compare
-          - filter
-          - enum_operators
+          - stack
+          - queue
+          - ring_buffer
+          - phasor
 
   schedule:
-    - cron: '59 20 19 12 *'  # UTC: 20:59 = 23:59 MSK 19 December
+    - cron: '59 20 26 12 *'  # UTC: 20:59 = 23:59 MSK 26 December
 
 jobs:
   test:
@@ -41,7 +36,7 @@ jobs:
           if [ "${{ github.event.inputs.tasks }}" = "all" ]; then
             # Find all tasks
             TASKS=()
-            for dir in 03_week/tasks/*/; do
+            for dir in 04_week/tasks/*/; do
               task=$(basename "$dir")
               TASKS+=("$task")
             done

@@ -29,7 +29,8 @@ jobs:
 
           tasks=("addition" "rms" "print_bits" "check_flags" "length_lit" "quadratic" "char_changer"
                  "swap_ptr" "func_array" "longest" "last_of_us" "little_big" "pretty_array"
-                 "data_stats" "unique" "range" "minmax" "find_all" "os_overload" "easy_compare" "filter" "enum_operators")
+                 "data_stats" "unique" "range" "minmax" "find_all" "os_overload" "easy_compare" "filter" "enum_operators"
+                 "stack" "queue" "ring_buffer" "phasor")
           
           declare -i passed_count=0
           declare -i failed_count=0
