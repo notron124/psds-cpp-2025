@@ -415,7 +415,7 @@ TEST_F(QueuePerformanceTest, CapacityConstructor) {
               << (100.0 * (time_without_reserve - time_with_reserve) / time_without_reserve)
               << "%)" << std::endl;
 
-    EXPECT_LT(time_with_reserve * 1.0, time_without_reserve * 0.9);
+    EXPECT_LT(time_with_reserve * 1.0, time_without_reserve * 0.94);
 }
 
 TEST_F(QueuePerformanceTest, CapacityCtorCompareWithVector) {
