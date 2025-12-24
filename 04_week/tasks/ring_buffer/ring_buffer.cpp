@@ -107,4 +107,29 @@ bool RingBuffer::TryPop(int& val) {
 
     return true;
 }
+
+int& RingBuffer::Front() {
+    return *frontIt;
+}
+
+const int& RingBuffer::Front() const {
+    return *frontIt;
+}
     
+int& RingBuffer::Back() {
+    return *backIt;
+}
+
+const int& RingBuffer::Back() const {
+    return *backIt;
+}
+
+bool RingBuffer::Empty() const {
+    return backIt == frontIt; // will be wrong on circ buffer size of one
+}
+
+bool RingBuffer::Full() const {
+    return (frontIt + 1) == backIt; // also will be wrong on buffer size of one 
+}
+
+
