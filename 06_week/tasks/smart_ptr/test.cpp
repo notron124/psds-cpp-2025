@@ -316,7 +316,7 @@ TEST(WeakPtrTest, AssignmentFromSharedPtr) {
 
     EXPECT_EQ(wp.UseCount(), 1);
     EXPECT_FALSE(wp.Expired());
-    auto sp_from_wp = wp2.Lock();
+    auto sp_from_wp = wp.Lock();
     EXPECT_EQ(*sp_from_wp, "test2");
 }
 
@@ -655,7 +655,7 @@ TEST(MakeSharedTest, MakeSharedWithMove) {
 
     EXPECT_NE(ptr.Get(), nullptr);
     EXPECT_EQ(ptr->data(), expected);
-    EXPECT_EQ(*ptr, "test");
+    EXPECT_EQ(*ptr, "testWithLongStringForAvoidSSO");
     EXPECT_EQ(ptr.UseCount(), 1);
 }
 
