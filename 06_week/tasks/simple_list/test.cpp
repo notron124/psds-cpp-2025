@@ -101,7 +101,7 @@ TEST(SimpleListTest, CopyAssignmentIndependency) {
     list1.PushBack("one");
     list1.PushBack("two");
 
-    list2 = list1;
+    SimpleList list2 = list1;
 
     EXPECT_EQ(list2.Size(), 2);
     EXPECT_EQ(list2.Front(), "one");
@@ -235,7 +235,7 @@ TEST(SimpleListTest, PushFront) {
     EXPECT_EQ(list.Back(), "one");
 
     if (original_value.size() > 16) {
-        const char* list_data = list.Back().data();
+        const char* list_data = list.Front().data();
         EXPECT_EQ(list_data, original_data);
     }
 
@@ -547,7 +547,7 @@ TEST(SimpleListTest, LargeList) {
     SimpleList list;
     const size_t COUNT = 1000;
 
-    for (size_t i = 0; i < N; ++i) {
+    for (size_t i = 0; i < COUNT; ++i) {
         list.PushBack(std::to_string(i));
     }
 
