@@ -1,8 +1,5 @@
 #include <algorithm>
-#include <cstddef>
-#include <ctime>
 #include <initializer_list>
-#include <memory>
 #include <utility>
 
 template<typename T, std::size_t arrSize>
@@ -11,14 +8,11 @@ public:
     Array() = default;
 
     Array(std::initializer_list<T> list) noexcept {
-        size_t size = std::min(list.size(), arrSize);
-        for (size_t i = 0; i < size; ++i) {
-            elems_[i] = list[i];
-        }
+        std::copy(list.begin(), list.end(), begin());
     }
 
     constexpr Array(const Array& other) {
-        std::copy(other.elems_, other.elems_ + arrSize, elems_);
+        std::copy(other.begin(), other.end(), elems_);
     }
 
     Array(Array&& other) noexcept {
@@ -32,7 +26,7 @@ public:
             return *this;
         }
 
-        std::copy(other.elems_, other.elems_ + arrSize, elems_);
+        std::copy(other.begin(), other.end(), elems_);
         return *this;
     }
 
@@ -44,24 +38,38 @@ public:
         for (size_t i = 0; i < arrSize; ++i) {
             elems_[i] = std::move(other.elems_[i]);
         }
+
+        return *this;
     }
 
-    constexpr auto operator[](size_t idx) const noexcept {
+    constexpr T& operator[](size_t idx) & noexcept {
         return elems_[idx];
+    }
+
+    constexpr const T& operator[](size_t idx) const& noexcept {
+        return elems_[idx];
+    }
+
+    constexpr T&& operator[](size_t idx) && noexcept {
+        return std::move(elems_[idx]);
     }
 
     ~Array() = default;
 
-    constexpr T& Front() const noexcept;
-    constexpr T& Back() const noexcept;
+    constexpr T& Front() noexcept;
+    constexpr const T& Front() const noexcept;
+    constexpr T& Back() noexcept;
+    constexpr const T& Back() const noexcept;
     constexpr T* Data() noexcept;
     constexpr const T* Data() const noexcept;
     constexpr bool Empty() const noexcept;
     constexpr size_t Size() const noexcept;
     constexpr void Fill(const T& elem) noexcept;
     constexpr void Swap(Array& other) noexcept;
-    constexpr auto begin() const noexcept;
-    constexpr auto end() const noexcept;
+    constexpr T* begin() noexcept;
+    constexpr const T* begin() const noexcept;
+    constexpr T* end() noexcept;
+    constexpr const T* end() const noexcept;
     constexpr const T* cbegin() const noexcept;
     constexpr const T* cend() const noexcept;
 
@@ -100,12 +108,22 @@ constexpr bool operator>=(const Array<T, arrSize>& lhs, const Array<T, arrSize>&
 }
 
 template<typename T, size_t arrSize>
-constexpr T& Array<T, arrSize>::Front() const noexcept {
+constexpr T& Array<T, arrSize>::Front() noexcept {
     return elems_[0];
 }
 
 template<typename T, size_t arrSize>
-constexpr T& Array<T, arrSize>::Back() const noexcept {
+constexpr const T& Array<T, arrSize>::Front() const noexcept {
+    return elems_[0];
+}
+
+template<typename T, size_t arrSize>
+constexpr T& Array<T, arrSize>::Back() noexcept {
+    return elems_[arrSize - 1];
+}
+
+template<typename T, size_t arrSize>
+constexpr const T& Array<T, arrSize>::Back() const noexcept {
     return elems_[arrSize - 1];
 }
 
@@ -142,12 +160,22 @@ constexpr void Array<T, arrSize>::Swap(Array& other) noexcept {
 }
 
 template<typename T, size_t arrSize>
-constexpr auto Array<T, arrSize>::begin() const noexcept {
+constexpr T* Array<T, arrSize>::begin() noexcept {
     return elems_;
 }
 
 template<typename T, size_t arrSize>
-constexpr auto Array<T, arrSize>::end() const noexcept {
+constexpr const T* Array<T, arrSize>::begin() const noexcept {
+    return elems_;
+}
+
+template<typename T, size_t arrSize>
+constexpr T* Array<T, arrSize>::end() noexcept {
+    return elems_ + arrSize;
+}
+
+template<typename T, size_t arrSize>
+constexpr const T* Array<T, arrSize>::end() const noexcept {
     return elems_ + arrSize;
 }
 
